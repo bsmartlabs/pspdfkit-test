@@ -13,9 +13,30 @@ buildscript {
     repositories {
         google()
         mavenCentral()
+        maven {
+          url 'https://customers.pspdfkit.com/maven'
+        }
     }
     dependencies {
         classpath("com.android.tools.build:gradle:7.3.1")
         classpath("com.facebook.react:react-native-gradle-plugin")
     }
+}
+
+allprojects {
+  repositories {
+
+    mavenCentral {
+      // We don't want to fetch react-native from Maven Central as there are
+      // older versions over there.
+      content {
+        excludeGroup "com.facebook.react"
+      }
+    }
+    google()
+    maven { url 'https://www.jitpack.io' }
+    maven {
+      url 'https://customers.pspdfkit.com/maven'
+    }
+  }
 }
